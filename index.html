@@ -74,92 +74,84 @@
 </div>
 
 <script>
-// === GOOGLE SHEETS CONFIG ===
-// === GOOGLE SHEETS CONFIG ===
-// Use ONE sheet ID and THREE sheet tabs
+// 📌 CONFIG
 const sheetId = "1xHp0FDSAfhHU97PAMk9k0bORvlFjtP_MO2k8wLtmjBk";
 
-const endpoints = {
-  telemarketing: `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=Telemarketing`,
-  collections: `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=Collections`,
-  survey: `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=Survey`
+const sheetTabs = {
+  telemarketing: "Telemarketing",
+  collections: "Collections",
+  survey: "Survey"
 };
 
-// === SHEET TAB NAMES ===
-const endpoints = {
-  telemarketing: `https://docs.google.com/spreadsheets/d/${telemarketingSheetId}/gviz/tq?tqx=out:json&sheet=Telemarketing`,
-  collections: `https://docs.google.com/spreadsheets/d/${collectionsSheetId}/gviz/tq?tqx=out:json&sheet=Collections`,
-  survey: `https://docs.google.com/spreadsheets/d/${surveySheetId}/gviz/tq?tqx=out:json&sheet=Survey`
-};
-
-// === FETCH FUNCTION ===
-async function fetchSheet(url) {
-  const raw = await fetch(url).then(r => r.text());
-  const json = JSON.parse(raw.substring(raw.indexOf('{'), raw.lastIndexOf('}') + 1));
-  return json.table.rows;
+function gvizUrl(sheetName) {
+  return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${sheetName}`;
 }
 
-// === LOAD DATA FROM ALL SHEETS ===
+// 📌 FETCH SHEET & PARSE JSON
+async function fetchSheet(url) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("Network issue fetching sheet");
+    const text = await res.text();
+
+    // There’s extra JS wrapper around the JSON, so strip it 🤓
+    const jsonStr = text
+      .substring(text.indexOf("{"), text.lastIndexOf("}") + 1);
+    const json = JSON.parse(jsonStr);
+    return json.table.rows || [];
+  } catch (err) {
+    console.error("❌ Fetch failed for:", url, err);
+    return [];
+  }
+}
+
+// 📌 LOAD DATA
 async function loadData() {
-  const tele = await fetchSheet(endpoints.telemarketing);
-  const coll = await fetchSheet(endpoints.collections);
-  const surv = await fetchSheet(endpoints.survey);
+  const tele = await fetchSheet(gvizUrl(sheetTabs.telemarketing));
+  const coll = await fetchSheet(gvizUrl(sheetTabs.collections));
+  const surv = await fetchSheet(gvizUrl(sheetTabs.survey));
 
   return {
-    leads: tele[0].c[1].v,
-    paymentConv: coll[0].c[1].v,
-    outbound: [tele[1].c[1].v, tele[2].c[1].v, tele[3].c[1].v, tele[4].c[1].v, tele[5].c[1].v],
-    customer: coll[1].c[1].v,
+    leads: tele[0]?.c?.[0]?.v || 0,
+    paymentConv: coll[0]?.c?.[0]?.v || 0,
+    outbound: tele.slice(1, 6).map(r => r.c?.[0]?.v || 0),
+    customer: coll[1]?.c?.[0]?.v || 0,
     surveyTable: surv.map(r => r.c.map(c => c?.v || "")),
-    participants: surv.map(r => r.c[1]?.v || 0)
+    participants: surv.map(r => r.c?.[1]?.v || 0)
   };
 }
 
-// === EXPORT CSV ===
-function exportCSV() {
-  const csv = "Sample,Data,Here";
-  const blob = new Blob([csv], { type: "text/csv" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "dashboard_export.csv";
-  a.click();
-}
-
-// === INIT DASHBOARD ===
-loadData().then(d => {
-  document.getElementById("leads").textContent = d.leads;
-  document.getElementById("paymentConv").textContent = d.paymentConv + "%";
+// 📌 INIT
+loadData().then(data => {
+  document.getElementById("leads").textContent = data.leads;
+  document.getElementById("paymentConv").textContent = data.paymentConv + "%";
 
   const surveyTable = document.getElementById("surveyTable");
-  surveyTable.innerHTML = "<tr><th>School</th><th>Participants</th><th>Week</th></tr>" +
-    d.surveyTable.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
-
-  new Chart(document.getElementById("campaignChart"), {
-    type: "pie",
-    data: { labels:["Field","Jotform"], datasets:[{ data:[800,450] }] }
-  });
-
-  new Chart(document.getElementById("issuesChart"), {
-    type: "bar",
-    data: { labels:["Resolved","Complaints"], datasets:[{ data:[70,20] }] }
-  });
+  surveyTable.innerHTML = `
+    <tr><th>School</th><th>Participants</th><th>Week</th></tr>
+    ${data.surveyTable.map(r =>
+      `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`
+    ).join("")}
+  `;
 
   new Chart(document.getElementById("lineChart"), {
-    type: "line",
-    data: { labels:[1,2,3,4,5], datasets:[{ data:d.outbound }] }
+    type:"line",
+    data:{ labels:[1,2,3,4,5], datasets:[{ data:data.outbound }] }
   });
 
   new Chart(document.getElementById("donutChart"), {
-    type: "doughnut",
-    data: { labels:["Satisfactory","Other"], datasets:[{ data:[d.customer,100-d.customer] }] }
+    type:"doughnut",
+    data:{ labels:["Customer","Other"], datasets:[{ data:[data.customer, 100-data.customer] }] }
   });
 
   new Chart(document.getElementById("barChart"), {
-    type: "bar",
-    data: { labels:["A","B","C","D"], datasets:[{ data:d.participants }] }
+    type:"bar",
+    data:{ labels:["A","B","C","D"], datasets:[{ data:data.participants }] }
   });
 });
 </script>
 
+
 </body>
 </html>
+
