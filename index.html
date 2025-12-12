@@ -91,36 +91,6 @@
       position: relative;
       height: 180px;
     }
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      color: #6b7280;
-      margin-top: 8px;
-    }
-    .legend-color {
-      width: 12px;
-      height: 12px;
-      border-radius: 3px;
-    }
-    .metric-row {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 10px;
-      padding: 8px 0;
-      border-top: 1px solid #f3f4f6;
-    }
-    .metric-label {
-      font-size: 11px;
-      color: #6b7280;
-      text-transform: uppercase;
-    }
-    .metric-value {
-      font-size: 14px;
-      font-weight: 600;
-      color: #1f2937;
-    }
     table {
       width: 100%;
       border-collapse: collapse;
@@ -154,12 +124,6 @@
       color: #1f2937;
       margin-top: 10px;
     }
-    .gauge-label {
-      font-size: 11px;
-      color: #6b7280;
-      text-transform: uppercase;
-      margin-top: 5px;
-    }
     .footer {
       text-align: center;
       margin-top: 25px;
@@ -167,6 +131,24 @@
       border-top: 1px solid #e5e7eb;
       font-size: 11px;
       color: #9ca3af;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 8px;
+    }
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: #6b7280;
     }
   </style>
 </head>
@@ -183,7 +165,9 @@
     <div class="tab tab-orange">SURVEY</div>
   </div>
 
-  <div class="grid">
+  <div id="loadingMsg" class="loading">Loading data from Google Sheets...</div>
+
+  <div class="grid" id="dashboardGrid" style="display: none;">
     <!-- Number of Leads Card -->
     <div class="card">
       <h3>Number of Leads</h3>
@@ -199,11 +183,11 @@
           <div style="display: flex; justify-content: space-between; margin-top: 8px; font-size: 11px;">
             <div>
               <div style="color: #6b7280;">FIELD</div>
-              <div style="font-weight: 600; color: #1f2937;">70.5%</div>
+              <div style="font-weight: 600; color: #1f2937;" id="fieldPercent">0%</div>
             </div>
             <div>
-              <div style="color: #6b7280;">JONFORM</div>
-              <div style="font-weight: 600; color: #1f2937;" id="jonform">800 / 450</div>
+              <div style="color: #6b7280;">ONLINE</div>
+              <div style="font-weight: 600; color: #1f2937;" id="onlineCount">0</div>
             </div>
           </div>
         </div>
@@ -256,7 +240,7 @@
         <canvas id="lineChart"></canvas>
       </div>
       <div style="text-align: right; margin-top: 10px;">
-        <div style="font-size: 24px; font-weight: 700; color: #1f2937;" id="totalCalls">12,000</div>
+        <div style="font-size: 24px; font-weight: 700; color: #1f2937;" id="totalCalls">0</div>
       </div>
     </div>
 
@@ -265,11 +249,11 @@
       <h3>Customer Service</h3>
       <div class="gauge-container">
         <canvas id="donutChart"></canvas>
-        <div class="gauge-value" id="csPercent">75%</div>
+        <div class="gauge-value" id="csPercent">0%</div>
       </div>
       <div style="text-align: right; margin-top: 10px;">
         <div style="font-size: 11px; color: #6b7280;">TOTAL OUTBOUND</div>
-        <div style="font-size: 18px; font-weight: 600; color: #1f2937;">9,200</div>
+        <div style="font-size: 18px; font-weight: 600; color: #1f2937;" id="totalOutbound">0</div>
       </div>
     </div>
 
@@ -283,7 +267,7 @@
   </div>
 
   <div class="footer">
-    Data last updated: <span id="lastUpdate">2023-10-26</span>
+    Data last updated: <span id="lastUpdate">-</span>
   </div>
 </div>
 
@@ -318,13 +302,29 @@ async function loadData() {
   const coll = await fetchSheet(gvizUrl(sheetTabs.collections));
   const surv = await fetchSheet(gvizUrl(sheetTabs.survey));
 
+  console.log("Telemarketing data:", tele);
+  console.log("Collections data:", coll);
+  console.log("Survey data:", surv);
+
   return {
-    leads: tele[0]?.c?.[0]?.v || 4500,
-    paymentConv: coll[0]?.c?.[0]?.v || 56,
-    outbound: tele.slice(1, 6).map(r => r.c?.[0]?.v || 0),
-    customer: coll[1]?.c?.[0]?.v || 75,
+    leads: tele[0]?.c?.[0]?.v || 0,
+    campaignSource: {
+      field: tele[0]?.c?.[1]?.v || 0,
+      online: tele[0]?.c?.[2]?.v || 0
+    },
+    commitConvert: {
+      commit: tele[0]?.c?.[3]?.v || 0,
+      convert: tele[0]?.c?.[4]?.v || 0
+    },
+    paymentConv: coll[0]?.c?.[0]?.v || 0,
+    customerService: coll[0]?.c?.[1]?.v || 0,
+    outboundCalls: tele.slice(1, 6).map(r => r.c?.[0]?.v || 0),
+    totalOutbound: coll[0]?.c?.[2]?.v || 0,
     surveyTable: surv.map(r => r.c.map(c => c?.v || "")),
-    participants: surv.map(r => r.c?.[1]?.v || 0)
+    participantsBySchool: surv.map(r => ({
+      school: r.c?.[0]?.v || "",
+      count: r.c?.[1]?.v || 0
+    }))
   };
 }
 
@@ -332,13 +332,27 @@ Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Ari
 Chart.defaults.color = "#6b7280";
 
 loadData().then(data => {
+  // Hide loading, show dashboard
+  document.getElementById("loadingMsg").style.display = "none";
+  document.getElementById("dashboardGrid").style.display = "grid";
+
+  // Update all dynamic values from Google Sheets
   document.getElementById("leads").textContent = data.leads.toLocaleString();
   document.getElementById("paymentConv").textContent = data.paymentConv + "%";
-  document.getElementById("csPercent").textContent = data.customer + "%";
-
-  const totalCalls = data.outbound.reduce((a, b) => a + b, 0);
+  document.getElementById("csPercent").textContent = data.customerService + "%";
+  
+  // Calculate total calls from outbound array
+  const totalCalls = data.outboundCalls.reduce((a, b) => a + b, 0);
   document.getElementById("totalCalls").textContent = totalCalls.toLocaleString();
+  document.getElementById("totalOutbound").textContent = data.totalOutbound.toLocaleString();
 
+  // Campaign source percentages
+  const totalCampaign = data.campaignSource.field + data.campaignSource.online;
+  const fieldPercent = totalCampaign > 0 ? ((data.campaignSource.field / totalCampaign) * 100).toFixed(1) : 0;
+  document.getElementById("fieldPercent").textContent = fieldPercent + "%";
+  document.getElementById("onlineCount").textContent = data.campaignSource.online;
+
+  // Survey table - populate from Google Sheets
   const surveyTable = document.getElementById("surveyTable");
   data.surveyTable.forEach(row => {
     const tr = document.createElement("tr");
@@ -346,13 +360,13 @@ loadData().then(data => {
     surveyTable.appendChild(tr);
   });
 
-  // Campaign Source Donut
+  // Campaign Source Donut - using real data
   new Chart(document.getElementById("campaignChart"), {
     type: "doughnut",
     data: {
       labels: ["Field", "Online"],
       datasets: [{
-        data: [70.5, 29.5],
+        data: [data.campaignSource.field, data.campaignSource.online],
         backgroundColor: ["#2563eb", "#06b6d4"],
         borderWidth: 0
       }]
@@ -367,13 +381,13 @@ loadData().then(data => {
     }
   });
 
-  // Convert Bar
+  // Commit vs Convert Bar - using real data
   new Chart(document.getElementById("convertChart"), {
     type: "bar",
     data: {
-      labels: ["800", "450"],
+      labels: ["Commit", "Convert"],
       datasets: [{
-        data: [800, 450],
+        data: [data.commitConvert.commit, data.commitConvert.convert],
         backgroundColor: ["#10b981", "#3b82f6"],
         borderRadius: 4
       }]
@@ -390,12 +404,12 @@ loadData().then(data => {
     }
   });
 
-  // Gauge Chart
+  // Gauge Chart - using real data
   new Chart(document.getElementById("gaugeChart"), {
     type: "doughnut",
     data: {
       datasets: [{
-        data: [data.customer, 100 - data.customer],
+        data: [data.customerService, 100 - data.customerService],
         backgroundColor: ["#ea580c", "#e5e7eb"],
         borderWidth: 0,
         circumference: 180,
@@ -410,13 +424,13 @@ loadData().then(data => {
     }
   });
 
-  // Line Chart
+  // Line Chart - using real outbound calls data
   new Chart(document.getElementById("lineChart"), {
     type: "line",
     data: {
-      labels: ["10th", "20th", "30th", "40th", "50th"],
+      labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"],
       datasets: [{
-        data: data.outbound.length ? data.outbound : [2000, 3500, 2800, 4200, 3800],
+        data: data.outboundCalls,
         borderColor: "#2563eb",
         backgroundColor: "rgba(37, 99, 235, 0.1)",
         fill: true,
@@ -444,12 +458,12 @@ loadData().then(data => {
     }
   });
 
-  // Donut Chart
+  // Donut Chart - using real customer service data
   new Chart(document.getElementById("donutChart"), {
     type: "doughnut",
     data: {
       datasets: [{
-        data: [data.customer, 100 - data.customer],
+        data: [data.customerService, 100 - data.customerService],
         backgroundColor: ["#ea580c", "#06b6d4"],
         borderWidth: 0,
         circumference: 180,
@@ -464,13 +478,16 @@ loadData().then(data => {
     }
   });
 
-  // Bar Chart
+  // Bar Chart - using real participants by school data
+  const schoolLabels = data.participantsBySchool.map(s => s.school);
+  const schoolCounts = data.participantsBySchool.map(s => s.count);
+  
   new Chart(document.getElementById("barChart"), {
     type: "bar",
     data: {
-      labels: ["10", "15", "30", "55", "100"],
+      labels: schoolLabels,
       datasets: [{
-        data: data.participants.length ? data.participants : [350, 420, 280, 300, 450],
+        data: schoolCounts,
         backgroundColor: "#ea580c",
         borderRadius: 6
       }]
@@ -494,7 +511,10 @@ loadData().then(data => {
   });
 
   // Update timestamp
-  document.getElementById("lastUpdate").textContent = new Date().toISOString().split('T')[0];
+  document.getElementById("lastUpdate").textContent = new Date().toLocaleString();
+}).catch(err => {
+  document.getElementById("loadingMsg").textContent = "Error loading data. Please check your Google Sheet permissions.";
+  console.error("Error:", err);
 });
 </script>
 </body>
