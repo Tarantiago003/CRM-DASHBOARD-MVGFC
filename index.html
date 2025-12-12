@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CRM Dashboard</title>
+  <title>CRM Dashboard - Manuel V. Gallego Foundation Colleges Inc.</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { 
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #1e3a8a 0%, #10b981 100%);
       min-height: 100vh;
       padding: 20px;
     }
@@ -31,7 +31,7 @@
     .logo {
       width: 50px;
       height: 50px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #1e3a8a 0%, #10b981 100%);
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -45,12 +45,13 @@
     }
     .header-title h1 {
       font-size: 24px;
-      color: #2d3748;
+      color: #1e3a8a;
       margin-bottom: 4px;
     }
     .header-title p {
       font-size: 13px;
-      color: #718096;
+      color: #10b981;
+      font-weight: 500;
     }
     .tabs {
       display: grid;
@@ -74,7 +75,7 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.12);
     }
     .tab.active {
-      border-color: #667eea;
+      border-color: #1e3a8a;
     }
     .tab-icon {
       font-size: 32px;
@@ -87,9 +88,9 @@
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-    .tab-blue .tab-icon { color: #2563eb; }
-    .tab-green .tab-icon { color: #059669; }
-    .tab-orange .tab-icon { color: #ea580c; }
+    .tab-blue .tab-icon { color: #1e3a8a; }
+    .tab-green .tab-icon { color: #10b981; }
+    .tab-orange .tab-icon { color: #f59e0b; }
     .dashboard {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -129,10 +130,10 @@
       justify-content: center;
       font-size: 18px;
     }
-    .icon-blue { background: #e0e7ff; color: #2563eb; }
-    .icon-green { background: #d1fae5; color: #059669; }
-    .icon-orange { background: #fed7aa; color: #ea580c; }
-    .icon-purple { background: #e9d5ff; color: #9333ea; }
+    .icon-blue { background: #dbeafe; color: #1e3a8a; }
+    .icon-green { background: #d1fae5; color: #10b981; }
+    .icon-orange { background: #fef3c7; color: #f59e0b; }
+    .icon-purple { background: #e9d5ff; color: #7c3aed; }
     .big-number {
       font-size: 48px;
       font-weight: 700;
@@ -167,7 +168,7 @@
       padding: 15px;
       background: #f7fafc;
       border-radius: 10px;
-      border-left: 4px solid #667eea;
+      border-left: 4px solid #1e3a8a;
     }
     table {
       width: 100%;
@@ -218,7 +219,7 @@
     }
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(90deg, #1e3a8a 0%, #10b981 100%);
       border-radius: 10px;
       transition: width 1s ease;
     }
@@ -227,14 +228,14 @@
 <body>
 <div class="container">
   <div class="header">
-    <div class="logo">📊</div>
+    <div class="logo">🎓</div>
     <div class="header-title">
       <h1>CRM Dashboard</h1>
       <p>Manuel V. Gallego Foundation Colleges Inc.</p>
     </div>
     <div style="text-align: right;">
       <div style="font-size: 12px; color: #718096;">Last Updated</div>
-      <div style="font-size: 14px; font-weight: 600; color: #2d3748;" id="lastUpdate">-</div>
+      <div style="font-size: 14px; font-weight: 600; color: #1e3a8a;" id="lastUpdate">-</div>
     </div>
   </div>
 
@@ -283,11 +284,11 @@
             <div class="progress-fill" id="fieldProgress" style="width: 0%"></div>
           </div>
         </div>
-        <div class="stat-box" style="border-left-color: #059669;">
+        <div class="stat-box" style="border-left-color: #10b981;">
           <div class="metric-label">Via Jotform</div>
           <div class="metric-value" id="jotform">0</div>
           <div class="progress-bar">
-            <div class="progress-fill" id="jotformProgress" style="width: 0%; background: linear-gradient(90deg, #059669 0%, #10b981 100%);"></div>
+            <div class="progress-fill" id="jotformProgress" style="width: 0%; background: linear-gradient(90deg, #10b981 0%, #34d399 100%);"></div>
           </div>
         </div>
       </div>
@@ -320,7 +321,7 @@
           <div class="metric-label">Commits</div>
           <div class="metric-value" id="commits">0</div>
         </div>
-        <div class="stat-box" style="border-left-color: #ea580c;">
+        <div class="stat-box" style="border-left-color: #f59e0b;">
           <div class="metric-label">Actual Converts</div>
           <div class="metric-value" id="converts">0</div>
         </div>
@@ -348,7 +349,7 @@
         <div class="metric-label">Actual Paid</div>
         <div class="metric-value" id="actualPaid">0</div>
         <div class="progress-bar">
-          <div class="progress-fill" id="paidProgress" style="width: 0%; background: linear-gradient(90deg, #059669 0%, #10b981 100%);"></div>
+          <div class="progress-fill" id="paidProgress" style="width: 0%; background: linear-gradient(90deg, #10b981 0%, #34d399 100%);"></div>
         </div>
       </div>
     </div>
@@ -364,7 +365,7 @@
           <div class="metric-label">Complaints</div>
           <div class="metric-value" id="complaints">0</div>
         </div>
-        <div class="stat-box" style="border-left-color: #059669;">
+        <div class="stat-box" style="border-left-color: #10b981;">
           <div class="metric-label">Issues Resolved</div>
           <div class="metric-value" id="issuesResolved">0</div>
         </div>
@@ -409,7 +410,7 @@
   </div>
 
   <div class="footer">
-    <strong>CRM Dashboard</strong> • Powered by Google Sheets • Data updates in real-time
+    <strong>Manuel V. Gallego Foundation Colleges Inc.</strong> • Powered by Google Sheets • Data updates in real-time
   </div>
 </div>
 
@@ -439,34 +440,46 @@ async function loadData() {
   const aftersales = await fetchSheet(gvizUrl("AFTERSALES"));
   const survey = await fetchSheet(gvizUrl("SURVEY"));
 
-  console.log("Presales:", presales);
-  console.log("Aftersales:", aftersales);
-  console.log("Survey:", survey);
+  console.log("=== RAW DATA FROM GOOGLE SHEETS ===");
+  console.log("Presales rows:", presales.length);
+  console.log("Presales data:", presales);
+  console.log("Aftersales rows:", aftersales.length);
+  console.log("Aftersales data:", aftersales);
+  console.log("Survey rows:", survey.length);
+  console.log("Survey data:", survey);
+
+  // Find the first row with actual data (skip headers)
+  let presalesDataRow = presales.find(r => r.c?.[0]?.v && typeof r.c[0].v === 'number');
+  let aftersalesDataRow = aftersales.find(r => r.c?.[0]?.v && typeof r.c[0].v === 'number');
+  
+  console.log("=== EXTRACTED DATA ===");
+  console.log("Presales data row:", presalesDataRow);
+  console.log("Aftersales data row:", aftersalesDataRow);
 
   return {
-    // Presales data (row 2, index 1)
-    leads: presales[1]?.c?.[0]?.v || 0,
-    fieldCampaign: presales[1]?.c?.[1]?.v || 0,
-    jotform: presales[1]?.c?.[2]?.v || 0,
-    totalOutbound: presales[1]?.c?.[3]?.v || 0,
-    commits: presales[1]?.c?.[4]?.v || 0,
-    converts: presales[1]?.c?.[5]?.v || 0,
+    // Presales data - finding first numeric row
+    leads: presalesDataRow?.c?.[0]?.v || 0,
+    fieldCampaign: presalesDataRow?.c?.[1]?.v || 0,
+    jotform: presalesDataRow?.c?.[2]?.v || 0,
+    totalOutbound: presalesDataRow?.c?.[3]?.v || 0,
+    commits: presalesDataRow?.c?.[4]?.v || 0,
+    converts: presalesDataRow?.c?.[5]?.v || 0,
     
-    // Aftersales data (row 2, index 1)
-    leadsPayable: aftersales[1]?.c?.[0]?.v || 0,
-    totalOutboundAfter: aftersales[1]?.c?.[1]?.v || 0,
-    paymentCommits: aftersales[1]?.c?.[2]?.v || 0,
-    actualPaid: aftersales[1]?.c?.[3]?.v || 0,
-    complaints: aftersales[1]?.c?.[4]?.v || 0,
-    issuesResolved: aftersales[1]?.c?.[5]?.v || 0,
-    satisfaction: aftersales[1]?.c?.[6]?.v || 0,
+    // Aftersales data - finding first numeric row
+    leadsPayable: aftersalesDataRow?.c?.[0]?.v || 0,
+    totalOutboundAfter: aftersalesDataRow?.c?.[1]?.v || 0,
+    paymentCommits: aftersalesDataRow?.c?.[2]?.v || 0,
+    actualPaid: aftersalesDataRow?.c?.[3]?.v || 0,
+    complaints: aftersalesDataRow?.c?.[4]?.v || 0,
+    issuesResolved: aftersalesDataRow?.c?.[5]?.v || 0,
+    satisfaction: aftersalesDataRow?.c?.[6]?.v || 0,
     
-    // Survey data (starting from row 2)
+    // Survey data - skip header row
     survey: survey.slice(1).map(r => ({
       school: r.c?.[0]?.v || "",
       participants: r.c?.[1]?.v || 0,
       week: r.c?.[2]?.v || 0
-    })).filter(s => s.school)
+    })).filter(s => s.school && s.participants)
   };
 }
 
@@ -474,6 +487,9 @@ Chart.defaults.font.family = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
 Chart.defaults.color = "#718096";
 
 loadData().then(data => {
+  console.log("=== FINAL PROCESSED DATA ===");
+  console.log(data);
+
   document.getElementById("loadingMsg").style.display = "none";
   document.getElementById("dashboard").style.display = "grid";
 
@@ -493,8 +509,10 @@ loadData().then(data => {
 
   // Progress bars
   const totalCampaign = data.fieldCampaign + data.jotform;
-  document.getElementById("fieldProgress").style.width = ((data.fieldCampaign / totalCampaign) * 100) + "%";
-  document.getElementById("jotformProgress").style.width = ((data.jotform / totalCampaign) * 100) + "%";
+  if (totalCampaign > 0) {
+    document.getElementById("fieldProgress").style.width = ((data.fieldCampaign / totalCampaign) * 100) + "%";
+    document.getElementById("jotformProgress").style.width = ((data.jotform / totalCampaign) * 100) + "%";
+  }
   
   const paidPercent = data.paymentCommits > 0 ? (data.actualPaid / data.paymentCommits) * 100 : 0;
   document.getElementById("paidProgress").style.width = paidPercent + "%";
@@ -502,11 +520,15 @@ loadData().then(data => {
 
   // Survey table
   const tbody = document.querySelector("#surveyTable tbody");
-  data.survey.forEach(s => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${s.school}</td><td><strong>${s.participants}</strong></td><td>${s.week}</td>`;
-    tbody.appendChild(tr);
-  });
+  if (data.survey.length > 0) {
+    data.survey.forEach(s => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${s.school}</td><td><strong>${s.participants}</strong></td><td>${s.week}</td>`;
+      tbody.appendChild(tr);
+    });
+  } else {
+    tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; color: #718096;">No survey data available</td></tr>';
+  }
 
   // Leads Trend Chart
   new Chart(document.getElementById("leadsChart"), {
@@ -514,9 +536,15 @@ loadData().then(data => {
     data: {
       labels: ["Jan", "Feb", "Mar", "Apr", "May"],
       datasets: [{
-        data: [data.leads * 0.6, data.leads * 0.75, data.leads * 0.85, data.leads * 0.95, data.leads],
-        borderColor: "#2563eb",
-        backgroundColor: "rgba(37, 99, 235, 0.1)",
+        data: data.leads > 0 ? [
+          data.leads * 0.6, 
+          data.leads * 0.75, 
+          data.leads * 0.85, 
+          data.leads * 0.95, 
+          data.leads
+        ] : [0, 0, 0, 0, 0],
+        borderColor: "#1e3a8a",
+        backgroundColor: "rgba(30, 58, 138, 0.1)",
         fill: true,
         tension: 0.4,
         borderWidth: 2,
@@ -540,8 +568,8 @@ loadData().then(data => {
     data: {
       labels: ["Field", "Jotform"],
       datasets: [{
-        data: [data.fieldCampaign, data.jotform],
-        backgroundColor: ["#667eea", "#059669"],
+        data: [data.fieldCampaign || 1, data.jotform || 1],
+        backgroundColor: ["#1e3a8a", "#10b981"],
         borderWidth: 0
       }]
     },
@@ -554,25 +582,27 @@ loadData().then(data => {
   });
 
   // Calls Line Chart
+  const callsData = data.totalOutbound > 0 ? [
+    data.totalOutbound * 0.15,
+    data.totalOutbound * 0.35,
+    data.totalOutbound * 0.55,
+    data.totalOutbound * 0.80,
+    data.totalOutbound
+  ] : [0, 0, 0, 0, 0];
+
   new Chart(document.getElementById("callsChart"), {
     type: "line",
     data: {
       labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"],
       datasets: [{
-        data: [
-          data.totalOutbound * 0.15,
-          data.totalOutbound * 0.35,
-          data.totalOutbound * 0.55,
-          data.totalOutbound * 0.80,
-          data.totalOutbound
-        ],
-        borderColor: "#059669",
-        backgroundColor: "rgba(5, 150, 105, 0.1)",
+        data: callsData,
+        borderColor: "#10b981",
+        backgroundColor: "rgba(16, 185, 129, 0.1)",
         fill: true,
         tension: 0.4,
         borderWidth: 3,
         pointRadius: 5,
-        pointBackgroundColor: "#059669"
+        pointBackgroundColor: "#10b981"
       }]
     },
     options: {
@@ -599,8 +629,8 @@ loadData().then(data => {
     data: {
       labels: ["Commits", "Converts"],
       datasets: [{
-        data: [data.commits, data.converts],
-        backgroundColor: ["#667eea", "#ea580c"],
+        data: [data.commits || 0, data.converts || 0],
+        backgroundColor: ["#1e3a8a", "#f59e0b"],
         borderRadius: 8
       }]
     },
@@ -619,33 +649,35 @@ loadData().then(data => {
   });
 
   // Survey Bar Chart
-  new Chart(document.getElementById("surveyChart"), {
-    type: "bar",
-    data: {
-      labels: data.survey.map(s => s.school),
-      datasets: [{
-        data: data.survey.map(s => s.participants),
-        backgroundColor: "#ea580c",
-        borderRadius: 8
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        y: { 
-          beginAtZero: true,
-          grid: { color: "#f1f5f9" },
-          ticks: { font: { size: 11 } }
-        },
-        x: { 
-          grid: { display: false },
-          ticks: { font: { size: 10 } }
+  if (data.survey.length > 0) {
+    new Chart(document.getElementById("surveyChart"), {
+      type: "bar",
+      data: {
+        labels: data.survey.map(s => s.school),
+        datasets: [{
+          data: data.survey.map(s => s.participants),
+          backgroundColor: "#f59e0b",
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { 
+            beginAtZero: true,
+            grid: { color: "#f1f5f9" },
+            ticks: { font: { size: 11 } }
+          },
+          x: { 
+            grid: { display: false },
+            ticks: { font: { size: 10 } }
+          }
         }
       }
-    }
-  });
+    });
+  }
 
   // Update timestamp
   const now = new Date();
@@ -657,4 +689,3 @@ loadData().then(data => {
 </script>
 </body>
 </html>
-
