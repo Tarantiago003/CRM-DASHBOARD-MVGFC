@@ -9,7 +9,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { 
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #1e3a8a 0%, #10b981 100%);
+      background: linear-gradient(135deg, #1e5631 0%, #2d7a4a 50%, #1e5631 100%);
       min-height: 100vh;
       padding: 20px;
     }
@@ -18,40 +18,43 @@
       margin: auto;
     }
     .header {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.98);
       backdrop-filter: blur(10px);
       padding: 25px 30px;
       border-radius: 16px;
       margin-bottom: 20px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
       display: flex;
       align-items: center;
       gap: 15px;
+      border-top: 4px solid #f4c430;
     }
     .logo {
-      width: 50px;
-      height: 50px;
-      background: linear-gradient(135deg, #1e3a8a 0%, #10b981 100%);
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #1e5631 0%, #2d7a4a 100%);
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
       font-weight: bold;
-      font-size: 24px;
+      font-size: 28px;
+      border: 3px solid #f4c430;
     }
     .header-title {
       flex: 1;
     }
     .header-title h1 {
       font-size: 24px;
-      color: #1e3a8a;
+      color: #1e5631;
       margin-bottom: 4px;
+      font-weight: 700;
     }
     .header-title p {
       font-size: 13px;
-      color: #10b981;
-      font-weight: 500;
+      color: #2d7a4a;
+      font-weight: 600;
     }
     .tabs {
       display: grid;
@@ -60,22 +63,24 @@
       margin-bottom: 20px;
     }
     .tab {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.98);
       backdrop-filter: blur(10px);
       padding: 20px;
       border-radius: 16px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
       border: 2px solid transparent;
     }
     .tab:hover {
       transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      border-color: #f4c430;
     }
     .tab.active {
-      border-color: #1e3a8a;
+      border-color: #1e5631;
+      background: rgba(30, 86, 49, 0.05);
     }
     .tab-icon {
       font-size: 32px;
@@ -88,25 +93,26 @@
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-    .tab-blue .tab-icon { color: #1e3a8a; }
-    .tab-green .tab-icon { color: #10b981; }
-    .tab-orange .tab-icon { color: #f59e0b; }
+    .tab-green .tab-icon { color: #1e5631; }
+    .tab-gold .tab-icon { color: #f4c430; }
+    .tab-blue .tab-icon { color: #1e5ba8; }
     .dashboard {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 20px;
     }
     .card {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.98);
       backdrop-filter: blur(10px);
       padding: 25px;
       border-radius: 16px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
       transition: all 0.3s ease;
+      border-top: 4px solid #1e5631;
     }
     .card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
     }
     .card-header {
       display: flex;
@@ -130,14 +136,14 @@
       justify-content: center;
       font-size: 18px;
     }
-    .icon-blue { background: #dbeafe; color: #1e3a8a; }
-    .icon-green { background: #d1fae5; color: #10b981; }
-    .icon-orange { background: #fef3c7; color: #f59e0b; }
-    .icon-purple { background: #e9d5ff; color: #7c3aed; }
+    .icon-green { background: #d4edda; color: #1e5631; }
+    .icon-gold { background: #fff3cd; color: #f4c430; }
+    .icon-blue { background: #cce5ff; color: #1e5ba8; }
+    .icon-red { background: #f8d7da; color: #c82333; }
     .big-number {
       font-size: 48px;
       font-weight: 700;
-      color: #1a202c;
+      color: #1e5631;
       margin-bottom: 8px;
       line-height: 1;
     }
@@ -149,7 +155,7 @@
     .metric-value {
       font-size: 18px;
       font-weight: 600;
-      color: #2d3748;
+      color: #1e5631;
     }
     .chart-wrapper {
       margin-top: 20px;
@@ -166,9 +172,9 @@
     }
     .stat-box {
       padding: 15px;
-      background: #f7fafc;
+      background: #f0f7f4;
       border-radius: 10px;
-      border-left: 4px solid #1e3a8a;
+      border-left: 4px solid #1e5631;
     }
     table {
       width: 100%;
@@ -180,19 +186,23 @@
       padding: 12px 8px;
       font-size: 11px;
       font-weight: 600;
-      color: #718096;
+      color: #1e5631;
       text-transform: uppercase;
-      border-bottom: 2px solid #e2e8f0;
+      border-bottom: 2px solid #1e5631;
       letter-spacing: 0.5px;
+      background: #f0f7f4;
     }
     td {
       padding: 14px 8px;
       color: #2d3748;
-      border-bottom: 1px solid #f1f5f9;
+      border-bottom: 1px solid #e2e8f0;
       font-size: 14px;
     }
     tr:last-child td {
       border-bottom: none;
+    }
+    tr:hover {
+      background: #f9fafb;
     }
     .loading {
       text-align: center;
@@ -203,12 +213,13 @@
     .footer {
       margin-top: 20px;
       text-align: center;
-      color: rgba(255, 255, 255, 0.9);
+      color: rgba(255, 255, 255, 0.95);
       font-size: 13px;
       padding: 20px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(10px);
       border-radius: 16px;
+      border-top: 3px solid #f4c430;
     }
     .progress-bar {
       height: 8px;
@@ -219,9 +230,12 @@
     }
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #1e3a8a 0%, #10b981 100%);
+      background: linear-gradient(90deg, #1e5631 0%, #2d7a4a 100%);
       border-radius: 10px;
       transition: width 1s ease;
+    }
+    .progress-gold {
+      background: linear-gradient(90deg, #f4c430 0%, #ffdb58 100%);
     }
   </style>
 </head>
@@ -235,20 +249,20 @@
     </div>
     <div style="text-align: right;">
       <div style="font-size: 12px; color: #718096;">Last Updated</div>
-      <div style="font-size: 14px; font-weight: 600; color: #1e3a8a;" id="lastUpdate">-</div>
+      <div style="font-size: 14px; font-weight: 600; color: #1e5631;" id="lastUpdate">-</div>
     </div>
   </div>
 
   <div class="tabs">
-    <div class="tab tab-blue active">
+    <div class="tab tab-green active">
       <div class="tab-icon">🎯</div>
       <div class="tab-title">Presales</div>
     </div>
-    <div class="tab tab-green">
+    <div class="tab tab-gold">
       <div class="tab-icon">💰</div>
       <div class="tab-title">After Sales</div>
     </div>
-    <div class="tab tab-orange">
+    <div class="tab tab-blue">
       <div class="tab-icon">📋</div>
       <div class="tab-title">Survey</div>
     </div>
@@ -261,7 +275,7 @@
     <div class="card">
       <div class="card-header">
         <div class="card-title">Total Leads</div>
-        <div class="card-icon icon-blue">📈</div>
+        <div class="card-icon icon-green">📈</div>
       </div>
       <div class="big-number" id="leads">0</div>
       <div class="metric-label">Active leads in pipeline</div>
@@ -274,7 +288,7 @@
     <div class="card">
       <div class="card-header">
         <div class="card-title">Campaign Performance</div>
-        <div class="card-icon icon-purple">🎪</div>
+        <div class="card-icon icon-gold">🎪</div>
       </div>
       <div class="stats-grid">
         <div class="stat-box">
@@ -284,11 +298,11 @@
             <div class="progress-fill" id="fieldProgress" style="width: 0%"></div>
           </div>
         </div>
-        <div class="stat-box" style="border-left-color: #10b981;">
+        <div class="stat-box" style="border-left-color: #f4c430;">
           <div class="metric-label">Via Jotform</div>
           <div class="metric-value" id="jotform">0</div>
           <div class="progress-bar">
-            <div class="progress-fill" id="jotformProgress" style="width: 0%; background: linear-gradient(90deg, #10b981 0%, #34d399 100%);"></div>
+            <div class="progress-fill progress-gold" id="jotformProgress" style="width: 0%;"></div>
           </div>
         </div>
       </div>
@@ -301,7 +315,7 @@
     <div class="card">
       <div class="card-header">
         <div class="card-title">Total Outbound Calls</div>
-        <div class="card-icon icon-green">📞</div>
+        <div class="card-icon icon-blue">📞</div>
       </div>
       <div class="big-number" id="totalCalls">0</div>
       <div class="metric-label">Calls made this period</div>
@@ -314,14 +328,14 @@
     <div class="card">
       <div class="card-header">
         <div class="card-title">Conversion Tracking</div>
-        <div class="card-icon icon-orange">🎯</div>
+        <div class="card-icon icon-gold">🎯</div>
       </div>
       <div class="stats-grid">
         <div class="stat-box">
           <div class="metric-label">Commits</div>
           <div class="metric-value" id="commits">0</div>
         </div>
-        <div class="stat-box" style="border-left-color: #f59e0b;">
+        <div class="stat-box" style="border-left-color: #f4c430;">
           <div class="metric-label">Actual Converts</div>
           <div class="metric-value" id="converts">0</div>
         </div>
@@ -349,7 +363,7 @@
         <div class="metric-label">Actual Paid</div>
         <div class="metric-value" id="actualPaid">0</div>
         <div class="progress-bar">
-          <div class="progress-fill" id="paidProgress" style="width: 0%; background: linear-gradient(90deg, #10b981 0%, #34d399 100%);"></div>
+          <div class="progress-fill" id="paidProgress" style="width: 0%;"></div>
         </div>
       </div>
     </div>
@@ -361,11 +375,11 @@
         <div class="card-icon icon-blue">🎧</div>
       </div>
       <div class="stats-grid">
-        <div class="stat-box">
+        <div class="stat-box" style="border-left-color: #c82333; background: #fff5f5;">
           <div class="metric-label">Complaints</div>
-          <div class="metric-value" id="complaints">0</div>
+          <div class="metric-value" style="color: #c82333;" id="complaints">0</div>
         </div>
-        <div class="stat-box" style="border-left-color: #10b981;">
+        <div class="stat-box" style="border-left-color: #1e5631;">
           <div class="metric-label">Issues Resolved</div>
           <div class="metric-value" id="issuesResolved">0</div>
         </div>
@@ -383,7 +397,7 @@
     <div class="card" style="grid-column: span 2;">
       <div class="card-header">
         <div class="card-title">Survey Participants by School</div>
-        <div class="card-icon icon-orange">🏫</div>
+        <div class="card-icon icon-gold">🏫</div>
       </div>
       <table id="surveyTable">
         <thead>
@@ -401,7 +415,7 @@
     <div class="card">
       <div class="card-header">
         <div class="card-title">Participants Distribution</div>
-        <div class="card-icon icon-purple">📊</div>
+        <div class="card-icon icon-green">📊</div>
       </div>
       <div class="chart-wrapper">
         <canvas id="surveyChart"></canvas>
@@ -410,7 +424,7 @@
   </div>
 
   <div class="footer">
-    <strong>Manuel V. Gallego Foundation Colleges Inc.</strong> • Powered by Google Sheets • Data updates in real-time
+    <strong>Manuel V. Gallego Foundation Colleges Inc.</strong> • Cabanatuan City, Philippines • Est. 1963
   </div>
 </div>
 
@@ -441,45 +455,50 @@ async function loadData() {
   const survey = await fetchSheet(gvizUrl("SURVEY"));
 
   console.log("=== RAW DATA FROM GOOGLE SHEETS ===");
-  console.log("Presales rows:", presales.length);
-  console.log("Presales data:", presales);
-  console.log("Aftersales rows:", aftersales.length);
-  console.log("Aftersales data:", aftersales);
-  console.log("Survey rows:", survey.length);
-  console.log("Survey data:", survey);
+  console.log("Presales rows:", presales);
+  console.log("Aftersales rows:", aftersales);
+  console.log("Survey rows:", survey);
 
-  // Find the first row with actual data (skip headers)
-  let presalesDataRow = presales.find(r => r.c?.[0]?.v && typeof r.c[0].v === 'number');
-  let aftersalesDataRow = aftersales.find(r => r.c?.[0]?.v && typeof r.c[0].v === 'number');
+  // Get the LAST row with data (most recent entry)
+  const presalesData = presales.filter(r => r.c?.[0]?.v && typeof r.c[0].v === 'number');
+  const aftersalesData = aftersales.filter(r => r.c?.[0]?.v && typeof r.c[0].v === 'number');
   
-  console.log("=== EXTRACTED DATA ===");
-  console.log("Presales data row:", presalesDataRow);
-  console.log("Aftersales data row:", aftersalesDataRow);
+  // Use the LAST data row (most recent)
+  const latestPresales = presalesData[presalesData.length - 1];
+  const latestAftersales = aftersalesData[aftersalesData.length - 1];
+  
+  console.log("=== LATEST DATA EXTRACTED ===");
+  console.log("Latest Presales:", latestPresales);
+  console.log("Latest Aftersales:", latestAftersales);
 
   return {
-    // Presales data - finding first numeric row
-    leads: presalesDataRow?.c?.[0]?.v || 0,
-    fieldCampaign: presalesDataRow?.c?.[1]?.v || 0,
-    jotform: presalesDataRow?.c?.[2]?.v || 0,
-    totalOutbound: presalesDataRow?.c?.[3]?.v || 0,
-    commits: presalesDataRow?.c?.[4]?.v || 0,
-    converts: presalesDataRow?.c?.[5]?.v || 0,
+    // Presales data - LATEST ROW
+    leads: latestPresales?.c?.[0]?.v || 0,
+    fieldCampaign: latestPresales?.c?.[1]?.v || 0,
+    jotform: latestPresales?.c?.[2]?.v || 0,
+    totalOutbound: latestPresales?.c?.[3]?.v || 0,
+    commits: latestPresales?.c?.[4]?.v || 0,
+    converts: latestPresales?.c?.[5]?.v || 0,
     
-    // Aftersales data - finding first numeric row
-    leadsPayable: aftersalesDataRow?.c?.[0]?.v || 0,
-    totalOutboundAfter: aftersalesDataRow?.c?.[1]?.v || 0,
-    paymentCommits: aftersalesDataRow?.c?.[2]?.v || 0,
-    actualPaid: aftersalesDataRow?.c?.[3]?.v || 0,
-    complaints: aftersalesDataRow?.c?.[4]?.v || 0,
-    issuesResolved: aftersalesDataRow?.c?.[5]?.v || 0,
-    satisfaction: aftersalesDataRow?.c?.[6]?.v || 0,
+    // Aftersales data - LATEST ROW
+    leadsPayable: latestAftersales?.c?.[0]?.v || 0,
+    totalOutboundAfter: latestAftersales?.c?.[1]?.v || 0,
+    paymentCommits: latestAftersales?.c?.[2]?.v || 0,
+    actualPaid: latestAftersales?.c?.[3]?.v || 0,
+    complaints: latestAftersales?.c?.[4]?.v || 0,
+    issuesResolved: latestAftersales?.c?.[5]?.v || 0,
+    satisfaction: latestAftersales?.c?.[6]?.v || 0,
     
-    // Survey data - skip header row
+    // Survey data - ALL ROWS (skip header)
     survey: survey.slice(1).map(r => ({
       school: r.c?.[0]?.v || "",
       participants: r.c?.[1]?.v || 0,
       week: r.c?.[2]?.v || 0
-    })).filter(s => s.school && s.participants)
+    })).filter(s => s.school && s.participants),
+    
+    // Historical data for charts (all rows)
+    presalesHistory: presalesData,
+    aftersalesHistory: aftersalesData
   };
 }
 
@@ -515,7 +534,7 @@ loadData().then(data => {
   }
   
   const paidPercent = data.paymentCommits > 0 ? (data.actualPaid / data.paymentCommits) * 100 : 0;
-  document.getElementById("paidProgress").style.width = paidPercent + "%";
+  document.getElementById("paidProgress").style.width = Math.min(paidPercent, 100) + "%";
   document.getElementById("satisfactionProgress").style.width = data.satisfaction + "%";
 
   // Survey table
@@ -523,32 +542,28 @@ loadData().then(data => {
   if (data.survey.length > 0) {
     data.survey.forEach(s => {
       const tr = document.createElement("tr");
-      tr.innerHTML = `<td>${s.school}</td><td><strong>${s.participants}</strong></td><td>${s.week}</td>`;
+      tr.innerHTML = `<td><strong>${s.school}</strong></td><td>${s.participants}</td><td>Week ${s.week}</td>`;
       tbody.appendChild(tr);
     });
   } else {
     tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; color: #718096;">No survey data available</td></tr>';
   }
 
-  // Leads Trend Chart
+  // Leads Trend Chart - using historical data if available
+  const leadsHistory = data.presalesHistory.map(r => r.c?.[0]?.v || 0);
   new Chart(document.getElementById("leadsChart"), {
     type: "line",
     data: {
-      labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+      labels: leadsHistory.map((_, i) => `Entry ${i + 1}`),
       datasets: [{
-        data: data.leads > 0 ? [
-          data.leads * 0.6, 
-          data.leads * 0.75, 
-          data.leads * 0.85, 
-          data.leads * 0.95, 
-          data.leads
-        ] : [0, 0, 0, 0, 0],
-        borderColor: "#1e3a8a",
-        backgroundColor: "rgba(30, 58, 138, 0.1)",
+        data: leadsHistory.length > 0 ? leadsHistory : [data.leads],
+        borderColor: "#1e5631",
+        backgroundColor: "rgba(30, 86, 49, 0.1)",
         fill: true,
         tension: 0.4,
         borderWidth: 2,
-        pointRadius: 0
+        pointRadius: 3,
+        pointBackgroundColor: "#1e5631"
       }]
     },
     options: {
@@ -566,10 +581,10 @@ loadData().then(data => {
   new Chart(document.getElementById("campaignChart"), {
     type: "doughnut",
     data: {
-      labels: ["Field", "Jotform"],
+      labels: ["Field Campaign", "Via Jotform"],
       datasets: [{
         data: [data.fieldCampaign || 1, data.jotform || 1],
-        backgroundColor: ["#1e3a8a", "#10b981"],
+        backgroundColor: ["#1e5631", "#f4c430"],
         borderWidth: 0
       }]
     },
@@ -577,32 +592,31 @@ loadData().then(data => {
       responsive: true,
       maintainAspectRatio: false,
       cutout: "70%",
-      plugins: { legend: { display: false } }
+      plugins: { 
+        legend: { 
+          display: true,
+          position: 'bottom',
+          labels: { font: { size: 10 } }
+        } 
+      }
     }
   });
 
-  // Calls Line Chart
-  const callsData = data.totalOutbound > 0 ? [
-    data.totalOutbound * 0.15,
-    data.totalOutbound * 0.35,
-    data.totalOutbound * 0.55,
-    data.totalOutbound * 0.80,
-    data.totalOutbound
-  ] : [0, 0, 0, 0, 0];
-
+  // Calls Line Chart - using historical outbound calls
+  const callsHistory = data.presalesHistory.map(r => r.c?.[3]?.v || 0);
   new Chart(document.getElementById("callsChart"), {
     type: "line",
     data: {
-      labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"],
+      labels: callsHistory.map((_, i) => `Period ${i + 1}`),
       datasets: [{
-        data: callsData,
-        borderColor: "#10b981",
-        backgroundColor: "rgba(16, 185, 129, 0.1)",
+        data: callsHistory.length > 0 ? callsHistory : [data.totalOutbound],
+        borderColor: "#1e5ba8",
+        backgroundColor: "rgba(30, 91, 168, 0.1)",
         fill: true,
         tension: 0.4,
         borderWidth: 3,
         pointRadius: 5,
-        pointBackgroundColor: "#10b981"
+        pointBackgroundColor: "#1e5ba8"
       }]
     },
     options: {
@@ -630,7 +644,7 @@ loadData().then(data => {
       labels: ["Commits", "Converts"],
       datasets: [{
         data: [data.commits || 0, data.converts || 0],
-        backgroundColor: ["#1e3a8a", "#f59e0b"],
+        backgroundColor: ["#1e5631", "#f4c430"],
         borderRadius: 8
       }]
     },
@@ -639,7 +653,10 @@ loadData().then(data => {
       maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: {
-        y: { display: false },
+        y: { 
+          beginAtZero: true,
+          grid: { color: "#f1f5f9" }
+        },
         x: { 
           grid: { display: false },
           ticks: { font: { size: 11 } }
@@ -656,7 +673,7 @@ loadData().then(data => {
         labels: data.survey.map(s => s.school),
         datasets: [{
           data: data.survey.map(s => s.participants),
-          backgroundColor: "#f59e0b",
+          backgroundColor: "#f4c430",
           borderRadius: 8
         }]
       },
@@ -681,9 +698,16 @@ loadData().then(data => {
 
   // Update timestamp
   const now = new Date();
-  document.getElementById("lastUpdate").textContent = now.toLocaleTimeString();
+  const options = { 
+    month: 'short', 
+    day: 'numeric', 
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  };
+  document.getElementById("lastUpdate").textContent = now.toLocaleString('en-US', options);
 }).catch(err => {
-  document.getElementById("loadingMsg").innerHTML = "❌ Error loading data<br>Please check Google Sheet permissions";
+  document.getElementById("loadingMsg").innerHTML = "❌ Error loading data<br><small>Please check Google Sheet permissions</small>";
   console.error("Error:", err);
 });
 </script>
