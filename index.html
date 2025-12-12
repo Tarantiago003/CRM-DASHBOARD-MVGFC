@@ -24,7 +24,7 @@
 
   <div class="topbar">
     <div class="logo"></div>
-    <div class="title">CRM Dashboard</div>
+    <div class="title">SALES & OPERATIONS OVERVIEW</div>
   </div>
 
   <button class="export-btn" onclick="exportCSV()">Download CSV</button>
@@ -75,9 +75,15 @@
 
 <script>
 // === GOOGLE SHEETS CONFIG ===
-const telemarketingSheetId = "1xHp0FDSAfhHU97PAMk9k0bORvlFjtP_MO2k8wLtmjBk";
-const collectionsSheetId = "1xHp0FDSAfhHU97PAMk9k0bORvlFjtP_MO2k8wLtmjBk";
-const surveySheetId = "1xHp0FDSAfhHU97PAMk9k0bORvlFjtP_MO2k8wLtmjBk";
+// === GOOGLE SHEETS CONFIG ===
+// Use ONE sheet ID and THREE sheet tabs
+const sheetId = "1xHp0FDSAfhHU97PAMk9k0bORvlFjtP_MO2k8wLtmjBk";
+
+const endpoints = {
+  telemarketing: `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=Telemarketing`,
+  collections: `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=Collections`,
+  survey: `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=Survey`
+};
 
 // === SHEET TAB NAMES ===
 const endpoints = {
@@ -157,4 +163,3 @@ loadData().then(d => {
 
 </body>
 </html>
-
